@@ -1,0 +1,52 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "apps/v1",
+  "metadata": {
+    "name": "redis-master",
+    "creationTimestamp": null,
+    "labels": {
+      "io.kompose.service": "redis-master"
+    },
+    "annotations": {
+      "kompose.cmd": "kompose convert -j",
+      "kompose.version": "1.22.0 (955b78124)"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "io.kompose.service": "redis-master"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "redis-master"
+        },
+        "annotations": {
+          "kompose.cmd": "kompose convert -j",
+          "kompose.version": "1.22.0 (955b78124)"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "redis-master",
+            "image": "redis:latest",
+            "ports": [
+              {
+                "containerPort": 6379
+              }
+            ],
+            "resources": {}
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}

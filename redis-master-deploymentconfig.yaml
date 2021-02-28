@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: redis-master
+  name: redis-master
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: redis-master
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: redis-master
+    spec:
+      containers:
+        - image: ' '
+          name: redis-master
+          ports:
+            - containerPort: 6379
+          resources: {}
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - redis-master
+        from:
+          kind: ImageStreamTag
+          name: redis-master:latest
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

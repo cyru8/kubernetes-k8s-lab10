@@ -1,0 +1,58 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "apps/v1",
+  "metadata": {
+    "name": "redis-slave",
+    "creationTimestamp": null,
+    "labels": {
+      "io.kompose.service": "redis-slave"
+    },
+    "annotations": {
+      "kompose.cmd": "kompose convert -j",
+      "kompose.version": "1.22.0 (955b78124)"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "io.kompose.service": "redis-slave"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "io.kompose.service": "redis-slave"
+        },
+        "annotations": {
+          "kompose.cmd": "kompose convert -j",
+          "kompose.version": "1.22.0 (955b78124)"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "redis-slave",
+            "image": "gcr.io/google_samples/gb-redisslave:v1",
+            "ports": [
+              {
+                "containerPort": 6379
+              }
+            ],
+            "env": [
+              {
+                "name": "GET_HOSTS_FROM",
+                "value": "dns"
+              }
+            ],
+            "resources": {}
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    },
+    "strategy": {}
+  },
+  "status": {}
+}
